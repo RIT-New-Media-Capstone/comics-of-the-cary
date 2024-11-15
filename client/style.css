@@ -1,1 +1,9 @@
-/* yo waddup */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#marker-ids {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
