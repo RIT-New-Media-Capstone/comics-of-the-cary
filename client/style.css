@@ -7,3 +7,8 @@ body {
     font-size: 1.5em;
     margin-top: 20px;
 }
+
+/* hide the camera, important */
+#webcam-container {
+    display: none;
+}

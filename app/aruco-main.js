@@ -92,7 +92,7 @@ const createWindow = () => {
         height: 576,
     });
 
-    mainWindow.loadFile('./client/index.html');
+    mainWindow.loadFile('./client/aruco-index.html');
     startPythonScript();
 };
 
