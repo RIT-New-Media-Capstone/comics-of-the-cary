@@ -1,1 +1,6 @@
 /* yo waddup */
+
+/* hide the camera, important */
+#webcam-container {
+    display: none;
+}
