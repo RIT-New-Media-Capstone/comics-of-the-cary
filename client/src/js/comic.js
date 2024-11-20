@@ -55,7 +55,7 @@ export const startCover = async (coverOptions) => {
     coverOptions.draw(ctx, images, coverBounds);
   }
 
-  setTimeout(() => {
+  setInterval(() => {
     coverOptions.update(30);
     draw();
   }, 30);
