@@ -25,7 +25,7 @@ const loadImage = (url) => {
 };
 
 const updateSpeechBubbleText = (text) => {
-  const speechBubble = document.querySelector('.speech-bubble');
+  const speechBubble = document.querySelector('.speech-bubble > p');
   speechBubble.replaceChildren(document.createTextNode(text));
 }
 
