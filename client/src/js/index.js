@@ -1,3 +1,5 @@
+import { startCover } from "./comic.js";
+// TODO import { ballsCover } from "./covers/balls.js";
 
 // This function is configured to be called whenever
 // a new comic is scanned. 
@@ -9,6 +11,12 @@ const handleNewComic = (comicName) => {
     
     // this is just a test
     document.querySelector('p').textContent = comicName;
+    switch(comicName) {
+        // TODO 
+        // case "balls":
+        //     startCover(ballsCover);
+        //     break;
+    }
 
 }
 
