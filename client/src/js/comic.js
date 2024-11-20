@@ -36,8 +36,8 @@ const updateScreenBackground = (url) => {
 export const startCover = async (coverOptions) => {
   const images = await loadImages(coverOptions.images);
   const canvas = document.querySelector("canvas");
-  updateSpeechBubbleText(coverOptions.speechBubble ?? "uhmm colby where's the speech bubble");
-  updateScreenBackground(coverOptions.background);
+  if (coverOptions.speechBubble) updateSpeechBubbleText(coverOptions.speechBubble);
+  if (coverOptions.background) updateScreenBackground(coverOptions.background);
   canvas.width = 1080;
   canvas.height = 1920;
   const ctx = canvas.getContext("2d");
@@ -51,7 +51,11 @@ export const startCover = async (coverOptions) => {
     height: 1097 / 1280 * canvas.height - 242 / 1280 * canvas.height
   };
   const draw = () => {
-    ctx.drawImage(images.cover, coverBounds.left, coverBounds.top, coverBounds.width, coverBounds.height);
+    ctx.save();
+    ctx.translate(coverBounds.left + coverBounds.width * 0.5, coverBounds.top + coverBounds.height * 0.5);
+    ctx.rotate(0.057);
+    ctx.drawImage(images.cover, -coverBounds.width * 0.5, -coverBounds.height * 0.5, coverBounds.width, coverBounds.height);
+    ctx.restore();
     coverOptions.draw(ctx, images, coverBounds);
   }
 
