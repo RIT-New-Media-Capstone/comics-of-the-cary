@@ -43,6 +43,21 @@ export const startCover = async (coverOptions) => {
   canvas.height = 1920;
   const ctx = canvas.getContext("2d");
 
+  canvas.addEventListener('mousedown', e => {
+    if (!coverOptions.onMouseDown) return;
+    coverOptions.onMouseDown(e.clientX, e.clientY);
+  })
+
+  canvas.addEventListener('mouseup', e => {
+    if (!coverOptions.onMouseUp) return;
+    coverOptions.onMouseUp(e.clientX, e.clientY);
+  })
+
+  canvas.addEventListener('mousemove', e => {
+    if (!coverOptions.onMouseMove) return;
+    coverOptions.onMouseMove(e.clientX, e.clientY);
+  })
+
   const coverBounds = {
     left: (78 / 720) * canvas.width,
     right: (642 / 720) * canvas.width,
