@@ -5,13 +5,13 @@ let mainWindow;
 // creates the window & makes the index.html file display on it
 const createWindow = () => {
     mainWindow = new BrowserWindow({
-        width: 1024,
-        height: 576,
+        width: 405,
+        height: 720,
         autoHideMenuBar: true
     })
 
     // begin by loading the index.html file into the window
-    mainWindow.loadFile('./client/tm-index.html');
+    mainWindow.loadFile('./client/scanned.html');
 }
 
 // take as much time as you need, show window when ready

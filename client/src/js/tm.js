@@ -14,6 +14,13 @@ import { handleNewComic } from './display-switch.js';
 // the link to the model folder, which contains the TeachableMachine data
 const URL = "./model/";
 
+// change this to force a specific comic
+// for testing
+// or make it "" to not force a comic
+// the name should appear exactly as it does in
+// the switch statement of display-switch.js
+const forcedComic = "Nothing";
+
 let model, webcam, textOutput, maxPredictions;
 
 let currentComic = undefined;
@@ -22,6 +29,12 @@ let numberOfDifferences = 0;
 
 // Load the image model and setup the webcam
 export const startPredictions = async () => {
+    
+    if (forcedComic) {
+        handleNewComic(forcedComic);
+        return;
+    }
+    
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
 
@@ -42,8 +55,6 @@ export const startPredictions = async () => {
 
     // append elements to the DOM
     document.getElementById("webcam-container").appendChild(webcam.canvas);
-
-    textOutput = document.querySelector("p");
 }
 
 const loop = async () => {
