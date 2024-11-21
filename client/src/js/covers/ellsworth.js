@@ -1,18 +1,81 @@
+const floaters = [
+  {
+    image: "batsignal",
+    x: .37,
+    y: .5,
+    offset: 0,
+  },
+  {
+    image: "subtitle",
+    x: .4,
+    y: .4,
+    offset: 0,
+  },
+  {
+    image: "superman",
+    x: .45,
+    y: .13,
+    offset: 0,
+  },
+  {
+    image: "dudes",
+    x: .15,
+    y: .48,
+    offset: 0,
+  },
+  {
+    image: "woman",
+    x: .53,
+    y: .39,
+    offset: 0,
+  },
+  {
+    image: "joker",
+    x: .13,
+    y: .63,
+    offset: 0,
+  },
+  {
+    image: "oldDude",
+    x: .2,
+    y: .5,
+    offset: 0,
+  },
+];
+
+let time = 0;
+
 export const ellsworth = {
-    // background: "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x4.jpg",
-    // speechBubble: "this is a test",
-    images: {
-      cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/220px-Cat_November_2010-1a.jpg",
-      image1: "https://th-thumbnailer.cdn-si-edu.com/bgmkh2ypz03IkiRR50I-UMaqUQc=/1000x750/filters:no_upscale():focal(1061x707:1062x708)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer_public/55/95/55958815-3a8a-4032-ac7a-ff8c8ec8898a/gettyimages-1067956982.jpg",
-      image2: "https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg",
-      image3: "https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg"
-    },
-    draw: (ctx, images, bounds) => {
-      ctx.drawImage(images.image1, 100, 200, 400, 400);
-      ctx.drawImage(images.image2, 600, 200, 400, 400);
-      ctx.drawImage(images.image3, 600, 700, 400, 400);
-    },
-    update: (deltaTime) => {
-      console.log('hi max' + deltaTime);
+  // background: "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x4.jpg",
+  // speechBubble: "this is a test",
+  images: {
+    cover: "./src/media/ellsworth/ellsworthbg.png",
+    batsignal: "./src/media/ellsworth/ellsworth01.png",
+    woman: "./src/media/ellsworth/ellsworth02.png",
+    superman: "./src/media/ellsworth/ellsworth03.png",
+    joker: "./src/media/ellsworth/ellsworth04.png",
+    oldDude: "./src/media/ellsworth/ellsworth05.png",
+    dudes: "./src/media/ellsworth/ellsworth06.png",
+    subtitle: "./src/media/ellsworth/textbody.png",
+  },
+  init: (images) => {
+    for (const floater of floaters) {
+      floater.offset = Math.random();
     }
-  }
+  },
+  draw: (ctx, images, bounds) => {
+    for (const floater of floaters) {
+      ctx.drawImage(
+        images[floater.image],
+        floater.x * ctx.canvas.width,
+        floater.y * ctx.canvas.height + 5 * Math.sin(0.002 * time + 5 * floater.offset),
+        images[floater.image].width * 0.6,
+        images[floater.image].height * 0.6
+      );
+    }
+  },
+  update: (deltaTime) => {
+    time += deltaTime;
+    console.log("hi max" + deltaTime);
+  },
+};
