@@ -161,9 +161,20 @@ const init = (images) => {
       e.preventDefault();
       return false;
     });
+    image.addEventListener("touchstart", (e) => {
+      if (dragging) return;
+      offsetX = 50;
+      offsetY = 50;
+      dragging = image;
+      e.preventDefault();
+      return false;
+    });
   }
 
   window.addEventListener("mouseup", (e) => {
+    dragging = null;
+  });
+  window.addEventListener("touchend", (e) => {
     dragging = null;
   });
 
@@ -173,6 +184,12 @@ const init = (images) => {
 
     dragging.style.setProperty("--top", `${e.clientY - offsetY}px`);
     dragging.style.setProperty("--left", `${e.clientX - offsetX}px`);
+  });
+  window.addEventListener("touchmove", (e) => {
+    if (!dragging) return;
+
+    dragging.style.setProperty("--top", `${e.touches[0].clientY - offsetY}px`);
+    dragging.style.setProperty("--left", `${e.touches[0].clientX - offsetX}px`);
   });
 };
 
