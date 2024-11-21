@@ -57,7 +57,7 @@ export const startCover = async (coverOptions) => {
     let x = e.clientX / rect.width * 1080;
     let y = e.clientY / rect.height * 1920;
     coverOptions.onMouseUp(x, y);
-  })
+  });
 
   canvas.addEventListener('mousemove', e => {
     if (!coverOptions.onMouseMove) return;
@@ -65,8 +65,6 @@ export const startCover = async (coverOptions) => {
     let x = e.clientX / rect.width * 1080;
     let y = e.clientY / rect.height * 1920;
     coverOptions.onMouseMove(x, y);
-  })
-    coverOptions.onMouseMove(e.clientX, e.clientY);
   });
 
   if (coverOptions.init) coverOptions.init(images);
