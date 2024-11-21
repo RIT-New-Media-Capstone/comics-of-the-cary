@@ -1,18 +1,61 @@
+const dice = [
+  {
+    image: "dice1",
+    x: 0,
+    y: 0,
+  },
+  {
+    image: "dice2",
+    x: 0,
+    y: 0,
+  },
+  {
+    image: "dice3",
+    x: 0,
+    y: 0,
+  },
+  {
+    image: "dice4",
+    x: 0,
+    y: 0,
+  },
+  {
+    image: "dice5",
+    x: 0,
+    y: 0,
+  },
+]
+
 export const casey = {
-  // background: "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x4.jpg",
-  // speechBubble: "this is a test",
+  background: "../media/casey/casey-background.svg",
+  speechBubble: "CLICK TO ROLL THE DICE!",
   images: {
-    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/220px-Cat_November_2010-1a.jpg",
-    image1: "https://th-thumbnailer.cdn-si-edu.com/bgmkh2ypz03IkiRR50I-UMaqUQc=/1000x750/filters:no_upscale():focal(1061x707:1062x708)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer_public/55/95/55958815-3a8a-4032-ac7a-ff8c8ec8898a/gettyimages-1067956982.jpg",
-    image2: "https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg",
-    image3: "https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg"
+    cover: "./src/media/casey/cover2.jpg",
+    dice1: "./src/media/casey/Dice-06.png",
+    dice2: "./src/media/casey/Dice-07.png",
+    dice3: "./src/media/casey/Dice-09.png",
+    dice4: "./src/media/casey/Dice-11.png",
+    dice5: "./src/media/casey/Dice1.png",
+  },
+  init: (images) => {
+    for (const die of dice) {
+      die.image = images[die.image];
+      die.x = Math.random();
+      die.y = Math.random();
+    }
   },
   draw: (ctx, images, bounds) => {
-    ctx.drawImage(images.image1, 100, 200, 400, 400);
-    ctx.drawImage(images.image2, 600, 200, 400, 400);
-    ctx.drawImage(images.image3, 600, 700, 400, 400);
+    for (const die of dice) {
+      ctx.drawImage(die.image, die.x * ctx.canvas.width, die.y * ctx.canvas.height);
+    }
   },
   update: (deltaTime) => {
     console.log('hi max' + deltaTime);
+  },
+  onMouseUp: () => {
+    for (const die of dice) {
+      die.x = Math.random();
+      die.y = Math.random();
+    }
   }
 }
