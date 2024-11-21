@@ -8,6 +8,11 @@ const loadImages = async (images) => {
   return imageElements;
 };
 
+let myInterval = undefined;
+let mouseDownFunc = undefined;
+let mouseMoveFunc = undefined;
+let mouseUpFunc = undefined;
+
 const loadImage = (url) => {
   return new Promise((resolve, reject) => {
     const image = new Image();
@@ -51,29 +56,39 @@ export const startCover = async (coverOptions) => {
   canvas.height = 1920;
   const ctx = canvas.getContext("2d");
 
-  canvas.addEventListener('mousedown', e => {
+  if (mouseDownFunc) canvas.removeEventListener("mousedown", mouseDownFunc);
+  if (mouseMoveFunc) canvas.removeEventListener("mousemove", mouseMoveFunc);
+  if (mouseUpFunc) canvas.removeEventListener("mouseup", mouseUpFunc);
+
+  mouseDownFunc = (e) => {
     if (!coverOptions.onMouseDown) return;
     let rect = canvas.getBoundingClientRect();
     let x = e.clientX / rect.width * 1080;
     let y = e.clientY / rect.height * 1920;
     coverOptions.onMouseDown(x, y);
-  })
+  };
 
-  canvas.addEventListener('mouseup', e => {
-    if (!coverOptions.onMouseUp) return;
-    let rect = canvas.getBoundingClientRect();
-    let x = e.clientX / rect.width * 1080;
-    let y = e.clientY / rect.height * 1920;
-    coverOptions.onMouseUp(x, y);
-  });
-
-  canvas.addEventListener('mousemove', e => {
+  mouseMoveFunc = (e) => {
     if (!coverOptions.onMouseMove) return;
     let rect = canvas.getBoundingClientRect();
     let x = e.clientX / rect.width * 1080;
     let y = e.clientY / rect.height * 1920;
     coverOptions.onMouseMove(x, y);
-  });
+  };
+
+  mouseUpFunc = (e) => {
+    if (!coverOptions.onMouseUp) return;
+    let rect = canvas.getBoundingClientRect();
+    let x = e.clientX / rect.width * 1080;
+    let y = e.clientY / rect.height * 1920;
+    coverOptions.onMouseUp(x, y);
+  };
+
+  canvas.addEventListener('mousedown', mouseDownFunc);
+
+  canvas.addEventListener('mouseup', mouseUpFunc);
+
+  canvas.addEventListener('mousemove', mouseMoveFunc);
 
   if (coverOptions.init) coverOptions.init(images);
 
@@ -107,7 +122,11 @@ export const startCover = async (coverOptions) => {
     coverOptions.draw(ctx, images, coverBounds);
   };
 
-  setInterval(() => {
+  if (myInterval) {
+    clearInterval(myInterval);
+  }
+
+  myInterval = setInterval(() => {
     if (coverOptions.update) coverOptions.update(30);
     draw();
   }, 30);
