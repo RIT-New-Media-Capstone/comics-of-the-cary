@@ -5,9 +5,7 @@ export const marinetti = {
       cover: "./src/media/marinetti/MARINETTI.png"
     },
     draw: (ctx, images, bounds) => {
-      console.log("NOOOOOOOOOOOOOOOOOOOOOOOOOOO");
     },
     update: (deltaTime) => {
-      console.log('hi max' + deltaTime);
     }
   }

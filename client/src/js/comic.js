@@ -12,6 +12,9 @@ let myInterval = undefined;
 let mouseDownFunc = undefined;
 let mouseMoveFunc = undefined;
 let mouseUpFunc = undefined;
+let touchDownFunc = undefined;
+let touchMoveFunc = undefined;
+let touchUpFunc = undefined;
 
 const loadImage = (url) => {
   return new Promise((resolve, reject) => {
@@ -56,9 +59,19 @@ export const startCover = async (coverOptions) => {
   canvas.height = 1920;
   const ctx = canvas.getContext("2d");
 
-  if (mouseDownFunc) canvas.removeEventListener("mousedown", mouseDownFunc);
-  if (mouseMoveFunc) canvas.removeEventListener("mousemove", mouseMoveFunc);
-  if (mouseUpFunc) canvas.removeEventListener("mouseup", mouseUpFunc);
+  if (mouseDownFunc) {
+    canvas.removeEventListener("mousedown", mouseDownFunc);
+    canvas.removeEventListener("touchstart", touchDownFunc);
+  } 
+  if (mouseMoveFunc) {
+    canvas.removeEventListener("mousemove", mouseMoveFunc);
+    canvas.removeEventListener("touchmove", touchMoveFunc);
+
+  }
+  if (mouseUpFunc) {
+    canvas.removeEventListener("mouseup", mouseUpFunc);
+    canvas.removeEventListener("touchend", touchUpFunc);
+  }
 
   mouseDownFunc = (e) => {
     if (!coverOptions.onMouseDown) return;
@@ -84,11 +97,36 @@ export const startCover = async (coverOptions) => {
     coverOptions.onMouseUp(x, y);
   };
 
+  touchDownFunc = (e) => {
+    if (!coverOptions.onMouseDown) return;
+    let rect = canvas.getBoundingClientRect();
+    let x = e.touches[0].clientX / rect.width * 1080;
+    let y = e.touches[0].clientY / rect.height * 1920;
+    coverOptions.onMouseDown(x, y);
+  };
+
+  touchMoveFunc = (e) => {
+    if (!coverOptions.onMouseMove) return;
+    let rect = canvas.getBoundingClientRect();
+    let x = e.touches[0].clientX / rect.width * 1080;
+    let y = e.touches[0].clientY / rect.height * 1920;
+    coverOptions.onMouseMove(x, y);
+  };
+
+  touchUpFunc = (e) => {
+    if (!coverOptions.onMouseUp) return;
+    let rect = canvas.getBoundingClientRect();
+    let x = e.touches[0].clientX / rect.width * 1080;
+    let y = e.touches[0].clientY / rect.height * 1920;
+    coverOptions.onMouseUp(x, y);
+  };
+
   canvas.addEventListener('mousedown', mouseDownFunc);
-
+  canvas.addEventListener('touchstart', touchDownFunc);
   canvas.addEventListener('mouseup', mouseUpFunc);
-
+  canvas.addEventListener('touchend', touchUpFunc);
   canvas.addEventListener('mousemove', mouseMoveFunc);
+  canvas.addEventListener('touchmove', touchMoveFunc);
 
   if (coverOptions.init) coverOptions.init(images);
 
