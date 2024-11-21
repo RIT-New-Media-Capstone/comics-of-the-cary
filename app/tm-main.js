@@ -7,7 +7,7 @@ const createWindow = () => {
     mainWindow = new BrowserWindow({
         width: 405,
         height: 720,
-        autoHideMenuBar: true
+        //autoHideMenuBar: true
     })
 
     // begin by loading the index.html file into the window

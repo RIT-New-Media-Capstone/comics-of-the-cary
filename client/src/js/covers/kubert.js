@@ -1,18 +1,85 @@
+const maskCanvas = document.createElement('canvas');
+const maskCtx = maskCanvas.getContext('2d');
+maskCanvas.width = 1080;
+maskCanvas.height = 1920;
+maskCtx.lineWidth = 50;
+
+const colorCanvas = document.createElement('canvas');
+const colorCtx = colorCanvas.getContext('2d');
+colorCanvas.width = 1080;
+colorCanvas.height = 1920;
+
+let isDrawing = false;
+let pX = undefined;
+let pY = undefined;
+
+function drawOnMask(x, y) {
+  console.log(`${x}, ${y}`);
+  maskCtx.fillStyle = 'black'; // Reveal color where drawn
+  maskCtx.filter = "blur(25px)";
+  maskCtx.moveTo(pX, pY);
+  maskCtx.lineTo(x, y);
+  maskCtx.stroke();
+  maskCtx.beginPath();
+  maskCtx.arc(x, y, 25, 0, Math.PI * 2); // Brush size
+  maskCtx.fill();
+  pX = x;
+  pY = y;
+}
+
 export const kubert = {
-    // background: "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x4.jpg",
-    // speechBubble: "this is a test",
-    images: {
-      cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/220px-Cat_November_2010-1a.jpg",
-      image1: "https://th-thumbnailer.cdn-si-edu.com/bgmkh2ypz03IkiRR50I-UMaqUQc=/1000x750/filters:no_upscale():focal(1061x707:1062x708)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer_public/55/95/55958815-3a8a-4032-ac7a-ff8c8ec8898a/gettyimages-1067956982.jpg",
-      image2: "https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg",
-      image3: "https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg"
-    },
-    draw: (ctx, images, bounds) => {
-      ctx.drawImage(images.image1, 100, 200, 400, 400);
-      ctx.drawImage(images.image2, 600, 200, 400, 400);
-      ctx.drawImage(images.image3, 600, 700, 400, 400);
-    },
-    update: (deltaTime) => {
-      console.log('hi max' + deltaTime);
-    }
-  }
+  // background: "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x4.jpg",
+  speechBubble: "Joe Kubert",
+  images: {
+    cover: "./src/media/kubert/kubert-grey.png",
+    colorCover: "./src/media/kubert/kubert-color.png"
+  },
+  draw: (ctx, images, bounds) => {
+
+    // Step 2: Draw the colored image
+    colorCtx.globalCompositeOperation = 'source-over';
+    colorCtx.save();
+    colorCtx.translate(
+      bounds.left + bounds.width * 0.5,
+      bounds.top + bounds.height * 0.5
+    );
+    colorCtx.rotate(0.057);
+    colorCtx.drawImage(
+      images.colorCover,
+      -bounds.width * 0.5,
+      -bounds.height * 0.5,
+      bounds.width,
+      bounds.height
+    );
+
+
+    // Step 3: Apply the mask using destination-in
+    colorCtx.globalCompositeOperation = 'destination-in';
+    colorCtx.drawImage(maskCanvas, 0, 0, maskCanvas.width, maskCanvas.height);
+
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(colorCanvas, 0, 0, maskCanvas.width, maskCanvas.height);
+
+    colorCtx.restore();
+  },
+
+  update: (deltaTime) => {
+  },
+
+  onMouseDown: (x, y) => {
+    isDrawing = true;
+    pX = X;
+    pY = Y;
+    drawOnMask(x, y);
+  },
+
+  onMouseUp: (x, y) => {
+    pX = undefined;
+    pY = undefined;
+    isDrawing = false;
+  },
+
+  onMouseMove: (x, y) => {
+    if (isDrawing) drawOnMask(x, y);
+  },
+}

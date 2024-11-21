@@ -45,17 +45,26 @@ export const startCover = async (coverOptions) => {
 
   canvas.addEventListener('mousedown', e => {
     if (!coverOptions.onMouseDown) return;
-    coverOptions.onMouseDown(e.clientX, e.clientY);
+    let rect = canvas.getBoundingClientRect();
+    let x = e.clientX / rect.width * 1080;
+    let y = e.clientY / rect.height * 1920;
+    coverOptions.onMouseDown(x, y);
   })
 
   canvas.addEventListener('mouseup', e => {
     if (!coverOptions.onMouseUp) return;
-    coverOptions.onMouseUp(e.clientX, e.clientY);
+    let rect = canvas.getBoundingClientRect();
+    let x = e.clientX / rect.width * 1080;
+    let y = e.clientY / rect.height * 1920;
+    coverOptions.onMouseUp(x, y);
   })
 
   canvas.addEventListener('mousemove', e => {
     if (!coverOptions.onMouseMove) return;
-    coverOptions.onMouseMove(e.clientX, e.clientY);
+    let rect = canvas.getBoundingClientRect();
+    let x = e.clientX / rect.width * 1080;
+    let y = e.clientY / rect.height * 1920;
+    coverOptions.onMouseMove(x, y);
   })
 
   const coverBounds = {

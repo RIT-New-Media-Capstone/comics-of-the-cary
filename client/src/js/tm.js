@@ -19,7 +19,7 @@ const URL = "./model/";
 // or make it "" to not force a comic
 // the name should appear exactly as it does in
 // the switch statement of display-switch.js
-const forcedComic = "Nothing";
+const forcedComic = "kubert";
 
 let model, webcam, textOutput, maxPredictions;
 
