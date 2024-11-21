@@ -66,6 +66,10 @@ export const startCover = async (coverOptions) => {
     let y = e.clientY / rect.height * 1920;
     coverOptions.onMouseMove(x, y);
   })
+    coverOptions.onMouseMove(e.clientX, e.clientY);
+  });
+
+  if (coverOptions.init) coverOptions.init(images);
 
   const coverBounds = {
     left: (78 / 720) * canvas.width,
@@ -94,7 +98,7 @@ export const startCover = async (coverOptions) => {
   };
 
   setInterval(() => {
-    coverOptions.update(30);
+    if (coverOptions.update) coverOptions.update(30);
     draw();
   }, 30);
 };
