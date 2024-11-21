@@ -1,8 +1,8 @@
 export const harak = {
-    // background: "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x4.jpg",
+    background: "../media/harak/back.svg",
     speechBubble: "Click the shapes to interact!",
     images: {
-      cover: "./src/media/harak/HARAK_starting_composition_reference.png",
+      myCover: "./src/media/harak/HARAK_starting_composition_reference.png",
       dots: "./src/media/harak/dots.gif",
       box1: "./src/media/harak/box-1.png",
       circle1: "./src/media/harak/circle1.gif"
@@ -72,6 +72,20 @@ export const harak = {
 
       ctx.restore();
       */
+      ctx.save();
+      ctx.translate(
+        bounds.left + bounds.width * 0.45,
+        bounds.top + bounds.height * 0.5
+      );
+      ctx.rotate(0.057);
+      ctx.drawImage(
+        images.myCover,
+        -bounds.width * 0.4,
+        -bounds.height * 0.5,
+        bounds.width * 0.9,
+        bounds.height
+      );
+      ctx.restore();
     },
     update: (deltaTime) => {
 
