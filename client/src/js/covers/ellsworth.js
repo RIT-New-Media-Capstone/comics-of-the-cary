@@ -8,7 +8,7 @@ const floaters = [
   {
     image: "subtitle",
     x: .4,
-    y: .4,
+    y: .39,
     offset: 0,
   },
   {
@@ -41,6 +41,12 @@ const floaters = [
     y: .5,
     offset: 0,
   },
+  {
+    image: "title",
+    x: .18,
+    y: .27,
+    offset: 0,
+  },
 ];
 
 let time = 0;
@@ -57,6 +63,7 @@ export const ellsworth = {
     oldDude: "./src/media/ellsworth/ellsworth05.png",
     dudes: "./src/media/ellsworth/ellsworth06.png",
     subtitle: "./src/media/ellsworth/textbody.png",
+    title: "./src/media/ellsworth/ellsworth.png"
   },
   init: (images) => {
     for (const floater of floaters) {
