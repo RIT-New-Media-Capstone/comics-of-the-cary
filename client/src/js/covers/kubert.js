@@ -14,7 +14,6 @@ let pX = undefined;
 let pY = undefined;
 
 function drawOnMask(x, y) {
-  console.log(`${x}, ${y}`);
   maskCtx.fillStyle = 'black'; // Reveal color where drawn
   maskCtx.filter = "blur(25px)";
   maskCtx.moveTo(pX, pY);
@@ -51,7 +50,7 @@ export const kubert = {
       bounds.width,
       bounds.height
     );
-
+    colorCtx.restore();
 
     // Step 3: Apply the mask using destination-in
     colorCtx.globalCompositeOperation = 'destination-in';
@@ -68,8 +67,8 @@ export const kubert = {
 
   onMouseDown: (x, y) => {
     isDrawing = true;
-    pX = X;
-    pY = Y;
+    pX = x;
+    pY = y;
     drawOnMask(x, y);
   },
 
