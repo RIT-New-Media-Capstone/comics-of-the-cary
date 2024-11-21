@@ -10,6 +10,7 @@ import { tomaszewski } from "./covers/tomaszewski.js";
 import { kenedy } from "./covers/kenedy.js";
 import { harak } from "./covers/harak.js";
 import { jacqueline } from "./covers/jacqueline.js";
+import { marinetti } from "./covers/marinetti.js";
 
 // This function is configured to be called whenever
 // a new comic is scanned.
@@ -53,6 +54,9 @@ export const handleNewComic = (comicName) => {
       break;
     case "jacqueline":
       startCover(jacqueline);
+      break;
+    case "marinetti":
+      startCover(marinetti);
       break;
   }
 };
