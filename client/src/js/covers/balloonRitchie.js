@@ -1,11 +1,24 @@
 export const balloonRitchie = {
-    // background: "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x4.jpg",
+    background: "../media/balloonRitchie/back.svg",
     speechBubble: "Drag across the cover to animate!",
     images: {
-      cover: "./src/media/balloonRitchie/Artboard 1 copy 6.png"
+      myCover: "./src/media/balloonRitchie/Artboard 1 copy 6.png"
     },
     draw: (ctx, images, bounds) => {
-      
+      ctx.save();
+      ctx.translate(
+        bounds.left + bounds.width * 0.5,
+        bounds.top + bounds.height * 0.5
+      );
+      ctx.rotate(0.057);
+      ctx.drawImage(
+        images.myCover,
+        -bounds.width * 0.4,
+        -bounds.height * 0.5,
+        bounds.width * 0.8,
+        bounds.height
+      );
+      ctx.restore();
     },
     update: (deltaTime) => {
       
