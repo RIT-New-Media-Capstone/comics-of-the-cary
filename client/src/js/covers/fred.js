@@ -1,18 +1,56 @@
+
+function currentImage(ctx, images, offsetX, offsetY, scaledWidth, scaledHeight, current) {
+  if(current == 1) {
+    ctx.drawImage(images.fred1, offsetX + 150, offsetY + 300, scaledWidth * 1.05, scaledHeight * 1.05)
+  } else if (current == 2) {
+    ctx.drawImage(images.fred2, offsetX + 150, offsetY + 300, scaledWidth * 1.05, scaledHeight * 1.05)
+  } else if (current == 3) {
+    ctx.drawImage(images.fred3, offsetX + 150, offsetY + 300, scaledWidth * 1.05, scaledHeight * 1.05)
+  } else if (current == 4) {
+    ctx.drawImage(images.fred4, offsetX + 150, offsetY + 300, scaledWidth * 1.05, scaledHeight * 1.05)
+  }
+  
+}
+
+
+
+
 export const fred = {
     // background: "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x4.jpg",
-    // speechBubble: "this is a test",
+    speechBubble: "Tap to change the color palette!",
     images: {
-      cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/220px-Cat_November_2010-1a.jpg",
-      image1: "https://th-thumbnailer.cdn-si-edu.com/bgmkh2ypz03IkiRR50I-UMaqUQc=/1000x750/filters:no_upscale():focal(1061x707:1062x708)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer_public/55/95/55958815-3a8a-4032-ac7a-ff8c8ec8898a/gettyimages-1067956982.jpg",
-      image2: "https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg",
-      image3: "https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg"
+      cover: "./src/media/fred/Artboard 2.png",
+      fred1: "./src/media/fred/Artboard 2.png",
+      fred2: "./src/media/fred/Artboard 2 copy 3.png",
+      fred3: "./src/media/fred/Artboard 2 copy 4.png",
+      fred4: "./src/media/fred/Artboard 2 copy 5.png",
     },
     draw: (ctx, images, bounds) => {
-      ctx.drawImage(images.image1, 100, 200, 400, 400);
-      ctx.drawImage(images.image2, 600, 200, 400, 400);
-      ctx.drawImage(images.image3, 600, 700, 400, 400);
+      const imageAspectRatio = images.cover.width / images.cover.height;
+      const canvasAspectRatio = bounds.width / bounds.height;
+      let scaledWidth, scaledHeight;
+      if (imageAspectRatio > canvasAspectRatio) {
+        scaledWidth = bounds.width;
+        scaledHeight = bounds.width / imageAspectRatio;
+      } else {
+        scaledHeight = bounds.height;
+        scaledWidth = bounds.height * imageAspectRatio;
+      }
+      const offsetX = (bounds.width - scaledWidth) / 2;
+      const offsetY = (bounds.height - scaledHeight) / 2;
+      let current = 1;
+      
+      ctx.save();
+      ctx.rotate(0.057);
+      ctx.fillStyle = "white";
+      ctx.fillRect(bounds.left + 50, bounds.top - 30, bounds.width, bounds.height);
+      currentImage(ctx, images, offsetX, offsetY, scaledWidth, scaledHeight, current);
+      ctx.restore();
     },
     update: (deltaTime) => {
-      console.log('hi max' + deltaTime);
+
+    },
+    onMouseDown: (x, y) => {
+      
     }
   }

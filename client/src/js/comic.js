@@ -86,6 +86,8 @@ export const startCover = async (coverOptions) => {
     height: (1097 / 1280) * canvas.height - (242 / 1280) * canvas.height,
   };
   const draw = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
     if (images.cover) {
       ctx.save();
       ctx.translate(
