@@ -25,6 +25,14 @@ const loadImage = (url) => {
 };
 
 const updateSpeechBubbleText = (text) => {
+  let speechBubbleDiv = document.querySelector(".speech-bubble");
+  if (text === " ") {
+    // hide bubble
+    speechBubbleDiv.style.visibility = "hidden";
+  } else {
+    speechBubbleDiv.style.visibility = "visible";
+  }
+
   const speechBubble = document.querySelector(".speech-bubble > p");
   speechBubble.replaceChildren(document.createTextNode(text));
 };
