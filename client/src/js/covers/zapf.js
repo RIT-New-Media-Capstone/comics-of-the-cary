@@ -148,8 +148,8 @@ const init = (images) => {
     const image = images[id];
 
     createDraggable(image, id);
-    image.style.setProperty("--left", `${left}px`);
-    image.style.setProperty("--top", `${top}px`);
+    image.style.setProperty("--left", `${100 * left / 1080}%`);
+    image.style.setProperty("--top", `${100 * top / 1920}%`);
     image.style.setProperty("--width", `${85 * width}%`);
     image.style.setProperty("--rotation", `${20 * (Math.random() - 0.5)}deg`);
 
@@ -177,7 +177,7 @@ const init = (images) => {
 };
 
 export const zapf = {
-  // background: "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x4.jpg",
+  background: "../media/zapf/zapf-background.png",
   speechBubble: "DRAG AROUND TO EXPLORE THE DESK!",
   images: {
     cover: "./src/media/zapf/background.png",
