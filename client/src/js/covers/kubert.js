@@ -28,7 +28,7 @@ function drawOnMask(x, y) {
 
 export const kubert = {
   // background: "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x4.jpg",
-  speechBubble: "Joe Kubert",
+  speechBubble: "Drag Across the cover to colorize!",
   images: {
     cover: "./src/media/kubert/kubert-grey.png",
     colorCover: "./src/media/kubert/kubert-color.png"

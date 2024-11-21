@@ -11,6 +11,7 @@ import { kenedy } from "./covers/kenedy.js";
 import { harak } from "./covers/harak.js";
 import { jacqueline } from "./covers/jacqueline.js";
 import { marinetti } from "./covers/marinetti.js";
+import { idle } from "./covers/idle.js";
 
 // This function is configured to be called whenever
 // a new comic is scanned.
@@ -23,7 +24,7 @@ export const handleNewComic = (comicName) => {
 
   switch (comicName) {
     case "Nothing":
-      startCover(templateCover);
+      startCover(idle);
       break;
     case "kubert":
       startCover(kubert);

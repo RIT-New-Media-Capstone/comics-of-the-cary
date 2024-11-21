@@ -57,7 +57,7 @@ export const startCover = async (coverOptions) => {
     let x = e.clientX / rect.width * 1080;
     let y = e.clientY / rect.height * 1920;
     coverOptions.onMouseUp(x, y);
-  })
+  });
 
   canvas.addEventListener('mousemove', e => {
     if (!coverOptions.onMouseMove) return;
@@ -65,7 +65,9 @@ export const startCover = async (coverOptions) => {
     let x = e.clientX / rect.width * 1080;
     let y = e.clientY / rect.height * 1920;
     coverOptions.onMouseMove(x, y);
-  })
+  });
+
+  if (coverOptions.init) coverOptions.init(images);
 
   const coverBounds = {
     left: (78 / 720) * canvas.width,
@@ -76,25 +78,27 @@ export const startCover = async (coverOptions) => {
     height: (1097 / 1280) * canvas.height - (242 / 1280) * canvas.height,
   };
   const draw = () => {
-    ctx.save();
-    ctx.translate(
-      coverBounds.left + coverBounds.width * 0.5,
-      coverBounds.top + coverBounds.height * 0.5
-    );
-    ctx.rotate(0.057);
-    ctx.drawImage(
-      images.cover,
-      -coverBounds.width * 0.5,
-      -coverBounds.height * 0.5,
-      coverBounds.width,
-      coverBounds.height
-    );
-    ctx.restore();
+    if (images.cover) {
+      ctx.save();
+      ctx.translate(
+        coverBounds.left + coverBounds.width * 0.5,
+        coverBounds.top + coverBounds.height * 0.5
+      );
+      ctx.rotate(0.057);
+      ctx.drawImage(
+        images.cover,
+        -coverBounds.width * 0.5,
+        -coverBounds.height * 0.5,
+        coverBounds.width,
+        coverBounds.height
+      );
+      ctx.restore();
+    }
     coverOptions.draw(ctx, images, coverBounds);
   };
 
   setInterval(() => {
-    coverOptions.update(30);
+    if (coverOptions.update) coverOptions.update(30);
     draw();
   }, 30);
 };
