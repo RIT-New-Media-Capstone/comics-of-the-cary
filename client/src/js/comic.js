@@ -79,21 +79,23 @@ export const startCover = async (coverOptions) => {
   };
   const draw = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.save();
-    ctx.translate(
-      coverBounds.left + coverBounds.width * 0.5,
-      coverBounds.top + coverBounds.height * 0.5
-    );
-    ctx.rotate(0.057);
-    ctx.drawImage(
-      images.cover,
-      -coverBounds.width * 0.5,
-      -coverBounds.height * 0.5,
-      coverBounds.width,
-      coverBounds.height
-    );
-    ctx.restore();
+    
+    if (images.cover) {
+      ctx.save();
+      ctx.translate(
+        coverBounds.left + coverBounds.width * 0.5,
+        coverBounds.top + coverBounds.height * 0.5
+      );
+      ctx.rotate(0.057);
+      ctx.drawImage(
+        images.cover,
+        -coverBounds.width * 0.5,
+        -coverBounds.height * 0.5,
+        coverBounds.width,
+        coverBounds.height
+      );
+      ctx.restore();
+    }
     coverOptions.draw(ctx, images, coverBounds);
   };
 
