@@ -10,6 +10,7 @@ import { tomaszewski } from "./covers/tomaszewski.js";
 import { kenedy } from "./covers/kenedy.js";
 import { harak } from "./covers/harak.js";
 import { jacqueline } from "./covers/jacqueline.js";
+import { casey } from "./covers/casey.js";
 import { marinetti } from "./covers/marinetti.js";
 import { idle } from "./covers/idle.js";
 
@@ -21,7 +22,6 @@ import { idle } from "./covers/idle.js";
 // page to reflect the new comic.
 
 export const handleNewComic = (comicName) => {
-
   switch (comicName) {
     case "Nothing":
       startCover(idle);
@@ -55,6 +55,9 @@ export const handleNewComic = (comicName) => {
       break;
     case "jacqueline":
       startCover(jacqueline);
+      break;
+    case "casey":
+      startCover(casey);
       break;
     case "marinetti":
       startCover(marinetti);
